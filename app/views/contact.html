@@ -1,1 +1,41 @@
+<div>
+  <ul>
+    <li>Home</li>
+    <li>Latest News</li>
+    <li restricted>User Administration</li>
+    <li restricted>Campaign Management</li>
+  </ul>
+</div>
+
+<user username="huseyinbabal" avatar="https://www.gravatar.com/avatar/ef36a722788f5d852e2635113b2b6b84?s=128&d=identicon&r=PG" reputation="8012"></user>
+
+
+<item name="Item-1"></item>
+<item name="Item-2"></item>
+<item name="Item-3"></item>
+
+
+<!-- isolated scope '@' test -->
+<notification message="{{message}}"></notification>
+
+
+<!-- isolated scope '=' test 변수 값이 아니라 변수자체를 넘겨받는다 -->
+<span>This is the textbox on the page</span>
+<input type="text" ng-model="commentText"/>
+<br/>
+<span>This is the textbox on the directive</span>
+<book-comment text="commentText"></book-comment>
+
+
+<!-- isolated scope '&' test  -->
+<div>
+  <like-book like="likeFunction(star)"></like-book>
+</div>
+
+
+<!-- controller 상속 사용 예제 -->
+<div>
+  <a><mouse-clicked ebook>Game of thrones (click me)</mouse-clicked></a><br/>
+  <a><mouse-clicked magazine>PC World (click me)</mouse-clicked></a>
+</div>
 

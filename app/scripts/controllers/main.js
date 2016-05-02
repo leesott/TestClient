@@ -8,8 +8,8 @@
  * Controller of the homeApp
  */
 angular.module('homeApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
+  .controller('MainCtrl', function ($scope) {
+    $scope.todos = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
