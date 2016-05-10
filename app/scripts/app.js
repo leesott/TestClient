@@ -11,7 +11,8 @@
 angular
   .module('homeApp', [
     'ngAnimate',
-    'ui.router'
+    'ui.router',
+    'ui.uploader'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -41,7 +42,16 @@ angular
         data: {
           requireLogin: true
         }
-      });
+      })
+      .state('upload', {
+        url: '/upload',
+        templateUrl: 'views/upload.html',
+        controller: 'UploadCtrl',
+        controllerAs: 'upload',
+        data: {
+          requireLogin: false
+       }});
+
     $urlRouterProvider.otherwise('/');
   })
   .constant('HOST', 'http://localhost:8080')
