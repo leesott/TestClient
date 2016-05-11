@@ -2,37 +2,23 @@
  * Created by eastflag on 2016-05-10.
  */
 angular.module('homeApp')
-  .controller('UploadCtrl', function ($scope, $log, uiUploader) {
-    $scope.btn_remove = function(file) {
-      $log.info('deleting=' + file);
-      uiUploader.removeFile(file);
-    };
-    $scope.btn_clean = function() {
-      uiUploader.removeAll();
-    };
-    $scope.btn_upload = function() {
-      $log.info('uploading...');
-      uiUploader.startUpload({
+  .controller('UploadCtrl', function ($scope, $log, Upload, $timeout) {
+    $scope.uploadPic = function(file) {
+      file.upload = Upload.upload({
         url: 'http://localhost:8080/api/upload',
-        options: {
-          withCredentials: true
-        },
-        concurrency: 2,
-        onProgress: function(file) {
-          $log.info(file.name + '=' + file.humanSize);
-          $scope.$apply();
-        },
-        onCompleted: function(file, response) {
-          $log.info(file + 'response' + response);
-        }
+        data: {user_id: 2, title: $scope.title, content: $scope.content, files: file}
       });
-    };
-    $scope.files = [];
-    var element = document.getElementById('file1');
-    element.addEventListener('change', function(e) {
-      var files = e.target.files;
-      uiUploader.addFiles(files);
-      $scope.files = uiUploader.getFiles();
-      $scope.$apply();
-    });
+
+      file.upload.then(function (response) {
+        $timeout(function () {
+          file.result = response.data;
+        });
+      }, function (response) {
+        if (response.status > 0)
+          $scope.errorMsg = response.status + ': ' + response.data;
+      }, function (evt) {
+        // Math.min is to fix IE which reports 200% sometimes
+        file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+      });
+    }
   });

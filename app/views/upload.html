@@ -1,31 +1,48 @@
 <div id="uploader">
   <div class="page-header">
-    <h1>Uploader</h1>
+    <h3>ng-file-upload example</h3>
   </div>
   <div class="row">
-    <div class="col-md-6">
-      <h3>What?</h3>
-      <p>Upload multiple files at the same time. See <a href="http://realtica.org/ng-uploader/demo.html">demo with upload actually working</a>.</p>
-
-      <div class="well">
-        <div>
-          <div style="float:right;">
-            <button ng-click="btn_upload()">Upload</button>
-            <button ng-click="btn_clean()">Remove all</button>
+      <h4>1. Upload with form submit and validations</h4>
+      <form class="form-horizontal" name="myForm">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" >제목</label>
+          <div class="col-sm-10">
+            <input type="text" name="title" ng-model="title" size="30" required>
+            <i ng-show="myForm.title.$error.required">*required</i><br>
           </div>
-          <input type="file" id="file1" multiple/>
         </div>
-        <div ng-repeat="file in files" style="margin-top: 20px;border-bottom-color: antiquewhite;border-bottom-style: double;">
-          <div><span>{{file.name}}</span><div style="float:right;"><span>{{file.humanSize}}</span><a ng-click="btn_remove(file)" title="Remove from list to be uploaded"><i class="icon-remove"></i></a></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" >내용</label>
+          <div class="col-sm-10">
+            <input type="text" name="content" ng-model="content" size="30" required>
+            <i ng-show="myForm.content.$error.required">*required</i>
           </div>
-          <progress style="width:400px;" value="{{file.loaded}}" max="{{file.size}}"></progress>
         </div>
-      </div>
-    </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" >사진</label>
+          <div class="col-sm-10">
+            <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" required
+                   ngf-model-invalid="errorFile">
+            <i ng-show="myForm.file.$error.required">*required</i><br>
+            <i ng-show="myForm.file.$error.maxSize">File too large
+              {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+            <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb"> <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label" ></label>
+          <div class="col-sm-10">
+            <button ng-disabled="!myForm.$valid"
+                    ng-click="uploadPic(picFile)">Submit</button>
+            <span class="progress" ng-show="picFile.progress >= 0">
+              <div style="width:{{picFile.progress}}%"
+                   ng-bind="picFile.progress + '%'"></div>
+            </span>
+            <span ng-show="picFile.result">Upload Successful</span>
+            <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+          </div>
+        </div>
+      </form>
 
-    <div class="col-md-6">
-      <h3>How?</h3>
-      <p>See <a href="https://github.com/angular-ui/ui-uploader/blob/master/demo/index.html">source of this demo</a>.</p>
-    </div>
-  </div>
 </div>

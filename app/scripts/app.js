@@ -12,7 +12,7 @@ angular
   .module('homeApp', [
     'ngAnimate',
     'ui.router',
-    'ui.uploader'
+    'ngFileUpload'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider

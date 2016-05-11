@@ -17,6 +17,16 @@ body {
   padding-right: 15px;
 }
 
+.thumb {
+  width:150px;
+}
+
+.progress div {
+  font-size: smaller;
+  background: orange;
+  width: 0;
+}
+
 /* Custom page header */
 /*.header {
   border-bottom: 1px solid #e5e5e5;
