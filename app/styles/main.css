@@ -69,6 +69,27 @@ body {
   margin-top: 28px;
 }
 
+.expander {
+  border: 1px solid black;
+  margin: 1px;
+  width: 250px;
+}
+
+.expander > .title {
+  background-color: black;
+  color: white;
+  padding: .1em .3em;
+  cursor: pointer;
+}
+
+.expander > .body {
+  padding: .1em .3em;
+}
+
+.closed {
+  display: none;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {

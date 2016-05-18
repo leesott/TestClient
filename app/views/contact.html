@@ -1,3 +1,6 @@
+<h2>directive test-------------------------------</h2>
+
+<h4>1. restricted test</h4>
 <div>
   <ul>
     <li>Home</li>
@@ -7,35 +10,47 @@
   </ul>
 </div>
 
+<h4>2. user tag test : link 펑션에서 전달된 attributes 사용하기</h4>
 <user username="huseyinbabal" avatar="https://www.gravatar.com/avatar/ef36a722788f5d852e2635113b2b6b84?s=128&d=identicon&r=PG" reputation="8012"></user>
 
-
+<h4>3. Isolated Scope test</h4>
 <item name="Item-1"></item>
 <item name="Item-2"></item>
 <item name="Item-3"></item>
 
 
-<!-- isolated scope '@' test -->
+<h4>4-1. Directive scope @ test : 단방향연동, 부모의 attribute값을 가져온다. 이름이 동일하면 @, 다르면 @속성명</h4>
 <notification message="{{message}}"></notification>
+<notification message="aaa"></notification>
 
-
-<!-- isolated scope '=' test 변수 값이 아니라 변수자체를 넘겨받는다 -->
+<h4>4-2. Directive scope = test : 양방향 연동,</h4>
 <span>This is the textbox on the page</span>
-<input type="text" ng-model="commentText"/>
-<br/>
+<input type="text" ng-model="commentText"/><br/>
 <span>This is the textbox on the directive</span>
-<book-comment text="commentText"></book-comment>
+<book-comment text="commentText"></book-comment> <!-- = 속성이므로 부모 스코프의 commentText를 참조한다 -->
 
-
-<!-- isolated scope '&' test  -->
+<h4>4-3. Directive scope & test: 단방향 메서드 연동</h4>
 <div>
   <like-book like="likeFunction(star)"></like-book>
 </div>
 
-
-<!-- controller 상속 사용 예제 -->
+<h4>5. controller 상속1</h4>
 <div>
   <a><mouse-clicked ebook>Game of thrones (click me)</mouse-clicked></a><br/>
   <a><mouse-clicked magazine>PC World (click me)</mouse-clicked></a>
 </div>
+
+<h4>6. controller 상속2</h4>
+<accordion>
+  <expander class='expander'
+            ng-repeat='expander in expanders'
+            expander-title='expander.title'>
+    {{expander.text}}
+  </expander>
+</accordion>
+
+<h4>7. expander 한개짜리 테스트</h4>
+<expander-one class='expander' expander-title='title'>
+  {{text}}
+</expander-one>
 

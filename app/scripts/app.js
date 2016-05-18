@@ -12,7 +12,8 @@ angular
   .module('homeApp', [
     'ngAnimate',
     'ui.router',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ngWebSocket'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
@@ -50,8 +51,15 @@ angular
         controllerAs: 'upload',
         data: {
           requireLogin: false
-       }});
-
+       }})
+      .state('socket', {
+        url: '/socket',
+        templateUrl: 'views/socket.html',
+        controller: 'SocketCtrl',
+        controllerAs: 'socket',
+        data: {
+          requireLogin: false
+        }});
     $urlRouterProvider.otherwise('/');
   })
   .constant('HOST', 'http://localhost:8080')
